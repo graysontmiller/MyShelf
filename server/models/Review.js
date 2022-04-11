@@ -4,7 +4,6 @@ const reviewSchema = new Schema(
   {
     reviewTitle: {
       type: String,
-      default: userBook.title
     },
     reviewText: {
       type: String,
