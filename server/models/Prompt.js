@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
 const userBookSchema = require('./userBook')
 
 const promptSchema = new Schema(
@@ -8,8 +7,8 @@ const promptSchema = new Schema(
     cardName: {
       type: String,
     },
-    promptNumber: {
-      type: Number,
+    prompt: {
+      type: String,
       required: true
     },
     prompt: {
@@ -24,6 +23,6 @@ const promptSchema = new Schema(
   }
 );
 
-const Prompt = model('Prompt', promptSchema);
+// const Prompt = model('Prompt', promptSchema);
 
-module.exports = Prompt;
+module.exports = promptSchema;

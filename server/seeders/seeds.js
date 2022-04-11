@@ -4,7 +4,7 @@ const db = require('../config/connection');
 const { PromptCard, User } = require('../models');
 
 db.once('open', async () => {
-  await PromptCard.deleteMany({});
+  // await Prompt.deleteMany({});
   await User.deleteMany({});
 
   // create user data

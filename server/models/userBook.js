@@ -14,7 +14,7 @@ const userBookSchema = new Schema(
         default: Date.now,
         get: timestamp => dateFormat(timestamp)  
     },
-    promptNumber: [promptSchema],
+    prompt: [promptSchema],
     havenNotRead: {
         type: Boolean
         // to be used for bookList. default is false and will be added to user's read books list, otherwise true and will add to a user's to be read list. 
@@ -35,4 +35,4 @@ const userBookSchema = new Schema(
     }
 );
 
-module.exports = userBook;
+module.exports = userBookSchema;

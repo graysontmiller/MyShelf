@@ -1,4 +1,4 @@
 const User = require('./User');
-const PromptCard = require('./PromptCard');
+const Prompt = require('./Prompt');
 
-module.exports = { User, PromptCard, userCard };
+module.exports = { User, Prompt};
