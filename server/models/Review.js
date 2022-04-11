@@ -25,4 +25,4 @@ const reviewSchema = new Schema(
 );
 
 
-module.exports = Review;
+module.exports = reviewSchema;
