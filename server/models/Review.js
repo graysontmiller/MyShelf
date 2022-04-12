@@ -8,8 +8,9 @@ const reviewSchema = new Schema(
     reviewText: {
       type: String,
       required: 'You need to create a review!',
-      minlength: 1,
-      maxlength: 280
+    },
+    reviewScore: {
+      type: Number
     },
     createdAt: {
       type: Date,

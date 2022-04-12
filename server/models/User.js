@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const userBookSchema = require('./userBook');
+const userBookSchema = require('./Book');
 
 const userSchema = new Schema(
   {
@@ -21,7 +21,6 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    userBook: [userBookSchema],
     following: [
       {
         type: Schema.Types.ObjectId,
