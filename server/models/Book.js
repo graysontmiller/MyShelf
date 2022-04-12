@@ -6,7 +6,7 @@ const dateFormat = require('../utils/dateFormat');
 const bookSchema = new Schema(
   {
     prompt: [promptSchema],
-    thoughtTitle: {
+    bookTitle: {
       type: String,
       required: 'You need to include the title!',
     },

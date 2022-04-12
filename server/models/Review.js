@@ -10,7 +10,7 @@ const reviewSchema = new Schema(
       required: 'You need to create a review!',
     },
     reviewScore: {
-      type: Number
+      type: String
     },
     createdAt: {
       type: Date,

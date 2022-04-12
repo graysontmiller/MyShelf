@@ -7,6 +7,10 @@ const promptSchema = new Schema(
       type: String,
       required: true
     },
+    // eg. First Row, First Prompt || Third Row, Fourth Prompt
+    promptLocation: {
+      type: String
+    },
     prompt: {
       type: String,
       required: true
@@ -14,6 +18,10 @@ const promptSchema = new Schema(
     description: {
         type: String,
         required: true
+    },
+    hardMode: {
+      type: String,
+      required: true
     }
   }
 );
