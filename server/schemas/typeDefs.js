@@ -6,7 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     followingCount: Int
-    books: [User]
+    books: [Book]
     following: [User]
   }
   
@@ -40,15 +40,28 @@ const typeDefs = gql`
   }
 
   type Query {
+    me: User
     users: [User]
     user(username: String!): User
-    books: [Book]
+    books(username: String): [Book]
     book(_id: ID!): Book
     prompts: [Prompt]
     prompt(_id: ID!): Prompt
     reviews: [Review]
     review(_id: ID!): Review
-    
+  }
+
+  type Auth {
+    token: ID!
+    user: User
+  }
+
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    addBook(bookTitle: String!, authors: String!): Book
+    addPrompt(bookID: ID!, prompt: String!): Book
+    addFollowing(followingId: ID!): User
   }
 `;
 
