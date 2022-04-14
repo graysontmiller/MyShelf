@@ -2,6 +2,7 @@ const { User, Book } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const Prompt = require('inquirer/lib/prompts/base');
+const dateFormat = require('../utils/dateFormat');
 
 
 
@@ -13,7 +14,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select('-__v -password')
           .populate('books')
-          .populate('following');
+          .populate('friends');
     
         return userData;
       }
@@ -25,14 +26,14 @@ const resolvers = {
       return User.find()
         .select('-__v -password')
         .populate('books')
-        .populate('following');
+        .populate('friends');
     },
     //when I query "user", perform a .findOne() method on the User Model
     user: async (parent, { username }) => {
       return User.findOne({ username })
         .select('-__v -password')
         .populate('books')
-        .populate('following');
+        .populate('friends');
     },
     //when I query "books", perform a .find() method on the Book Model
     books: async (parent, { username }) => {
@@ -75,7 +76,7 @@ const resolvers = {
     
         await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { books: Book._id } },
+          { $push: { books: book._id } },
           { new: true }
         );
     
@@ -84,16 +85,29 @@ const resolvers = {
     
       throw new AuthenticationError('You need to be logged in!');
     },
-
-    addPrompt: async (parent, { bookId, reactionBody }, context) => {
+    addReview: async (parent, { bookId, reviewTitle, reviewText, reviewScore }, context) => {
       if (context.user) {
         const updatedBook = await Book.findOneAndUpdate(
           { _id: bookId },
-          { $push: { prompt: Prompt._id } },
+          { $push: { reviews: { reviewTitle, reviewText, reviewScore, username: context.user.username } } },
           { new: true, runValidators: true }
         );
     
-        return updatedPrompt;
+        return updatedBook;
+      }
+    
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    addFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { friends: friendId } },
+          { new: true }
+        ).populate('friends');
+    
+        return updatedUser;
       }
     
       throw new AuthenticationError('You need to be logged in!');

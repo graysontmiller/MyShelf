@@ -21,7 +21,7 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    following: [
+    friends: [
       {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -58,8 +58,8 @@ userSchema.methods.isCorrectPassword = async function(password) {
 };
 
 
-userSchema.virtual('followingCount').get(function() {
-  return this.following.length;
+userSchema.virtual('friendCount').get(function() {
+  return this.friends.length;
 });
 
 const User = model('User', userSchema);

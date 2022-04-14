@@ -1,11 +1,11 @@
 const { Schema, model } = require('mongoose');
-const promptSchema = require('./Prompt');
+// const promptSchema = require('./Prompt');
 const reviewSchema = require('./Review');
 const dateFormat = require('../utils/dateFormat');
 
 const bookSchema = new Schema(
   {
-    prompt: [promptSchema],
+    
     bookTitle: {
       type: String,
       required: 'You need to include the title!',
@@ -24,6 +24,9 @@ const bookSchema = new Schema(
       type: String
     },
     image: {
+      type: String
+    },
+    prompt: {
       type: String
     }
   },

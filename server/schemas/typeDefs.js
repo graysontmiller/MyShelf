@@ -5,20 +5,20 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    followingCount: Int
+    friendCount: Int
     books: [Book]
-    following: [User]
+    friends: [User]
   }
   
   type Book {
     _id: ID
-    prompt: [Prompt]
     bookTitle: String
     createdAt: String
     username: String
-    reviews: [Review]
     authors: String
     image: String
+    prompt: String
+    reviews: [Review]
   }
 
   type Review {
@@ -30,23 +30,12 @@ const typeDefs = gql`
     username: String
   }
 
-  type Prompt {
-    _id: ID
-    cardName: String
-    promptLocation: String
-    prompt: String
-    description: String
-    hardMode: String
-  }
-
   type Query {
     me: User
     users: [User]
     user(username: String!): User
     books(username: String): [Book]
     book(_id: ID!): Book
-    prompts: [Prompt]
-    prompt(_id: ID!): Prompt
     reviews: [Review]
     review(_id: ID!): Review
   }
@@ -58,10 +47,14 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): Auth
+
     addUser(username: String!, email: String!, password: String!): Auth
-    addBook(bookTitle: String!, authors: String!): Book
-    addPrompt(bookID: ID!, prompt: String!): Book
-    addFollowing(followingId: ID!): User
+
+    addBook(bookTitle: String!, authors: String!, prompt: String): Book
+
+    addReview(bookId: ID!, reviewTitle: String! reviewText: String!, reviewScore: String!): Book
+
+    addFriend(friendId: ID!): User
   }
 `;
 
