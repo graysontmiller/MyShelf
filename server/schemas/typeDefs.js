@@ -18,6 +18,7 @@ const typeDefs = gql`
     authors: String
     image: String
     prompts: [Prompt]
+    isReviewed: Int
     reviews: [Review]
   }
 
@@ -60,7 +61,7 @@ const typeDefs = gql`
 
     addUser(username: String!, email: String!, password: String!): Auth
 
-    addBook(bookTitle: String!, authors: String!, prompt: String): Book
+    addBook(title: String!, authors: String!, prompt: String): Book
 
     addPrompt(promptLocation: String!, prompt: String!, description: String!, hardMode: String!): Prompt
 

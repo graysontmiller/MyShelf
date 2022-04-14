@@ -36,6 +36,10 @@ const bookSchema = new Schema(
   }
 );
 
+bookSchema.virtual('isReviewed').get(function() {
+  return this.reviews.length;
+});
+
 const Book = model('Book', bookSchema);
 
 module.exports = Book;
