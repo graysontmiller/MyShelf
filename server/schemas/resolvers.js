@@ -43,7 +43,16 @@ const resolvers = {
     //when I query "book", perform a .findOne() method on the Book Model
     book: async (parent, { _id }) => {
       return Book.findOne({ _id });
-    }
+    },
+    prompts: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return prompt.find(params).sort({ createdAt: -1 });
+    },
+    prompt: async (parent, { _id }) => {
+      return prompt.findOne({ _id });
+
+
+    },
   },
 
   Mutation: {
@@ -85,18 +94,8 @@ const resolvers = {
     
       throw new AuthenticationError('You need to be logged in!');
     },
-
-//!Adding prompt is not currently working. Skipping this feature for now to come back at a later date.
-
-    // addPrompt: async (parent, args) => {
-    //   const prompt = await Prompt.create(args);
-
-    //   await Prompt.findByIdAndUpdate(
-    //     {$push: {prompts: prompt._id}}
-    //   );
-
-    //   return prompt;
-    // },
+ 
+  
 
     addReview: async (parent, { bookId, reviewTitle, reviewText, reviewScore }, context) => {
       if (context.user) {
@@ -117,6 +116,20 @@ const resolvers = {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { friends: friendId } },
+          { new: true }
+        ).populate('friends');
+    
+        return updatedUser;
+      }
+    
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    removeFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.update(
+          { _id: context.user._id },
+          { $pull: { friends: friendId } },
           { new: true }
         ).populate('friends');
     

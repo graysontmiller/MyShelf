@@ -27,7 +27,9 @@ const bookSchema = new Schema(
     image: {
       type: String
     },
-    prompt: [promptSchema]
+    bingoPrompt: {
+      type: String
+    }
   },
   {
     toJSON: {

@@ -6,6 +6,8 @@ import Auth from '../utils/auth';
 
 import BookList from '../components/BookList';
 import FriendList from '../components/FriendList';
+import BookFormButton from '../components/BookFormButton';
+import BookForm from '../components/BookForm';
 
 
 const Home = () => {
@@ -20,8 +22,14 @@ const { data: userData } = useQuery(QUERY_ME_BASIC);
   const loggedIn = Auth.loggedIn();
   return (
     <main>
-       <div className="flex-row justify-space-between">
-      <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}> 
+  <div className="flex-row justify-space-between">
+    {/* {loggedIn && (
+      <div className="col-12 mb-3">
+        <BookForm />
+      </div>
+    )} */}
+    <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}>
+    
            {loading ? (
         <div>Loading...</div>
       ) : (
@@ -30,6 +38,7 @@ const { data: userData } = useQuery(QUERY_ME_BASIC);
     </div>
     {loggedIn && userData ? (
           <div className="col-12 col-lg-3 mb-3">
+            
             <FriendList
               username={userData.me.username}
               friendCount={userData.me.friendCount}

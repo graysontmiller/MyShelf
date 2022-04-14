@@ -3,8 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_BOOK } from '../utils/queries';
+import Auth from '../utils/auth';
 
 import ReviewList from '../components/ReviewList';
+import ReviewForm from '../components/ReviewForm';
+
 
 
 const SingleThought = props => {
@@ -37,7 +40,11 @@ const SingleThought = props => {
     </div>
 
     {book.isReviewed > 0 && <ReviewList reviews={book.reviews} />}
-    {!book.isReviewed > 0 && <p>This book has not been reviewed yet</p> }
+    {!book.isReviewed > 0 && <p>This book has not been reviewed yet</p> } 
+
+    {Auth.loggedIn() && <ReviewForm bookId={book._id} />}
+
+    
   </div>
   );
 };
