@@ -17,8 +17,16 @@ const typeDefs = gql`
     username: String
     authors: String
     image: String
-    prompt: String
+    prompts: [Prompt]
     reviews: [Review]
+  }
+
+  type Prompt {
+    _id: ID
+    promptLocation: String
+    prompt: String
+    description: String
+    hardMode: String
   }
 
   type Review {
@@ -38,6 +46,8 @@ const typeDefs = gql`
     book(_id: ID!): Book
     reviews: [Review]
     review(_id: ID!): Review
+    prompts: [Prompt]
+    prompt(_id: ID!): Prompt
   }
 
   type Auth {
@@ -52,9 +62,12 @@ const typeDefs = gql`
 
     addBook(bookTitle: String!, authors: String!, prompt: String): Book
 
+    addPrompt(promptLocation: String!, prompt: String!, description: String!, hardMode: String!): Prompt
+
     addReview(bookId: ID!, reviewTitle: String! reviewText: String!, reviewScore: String!): Book
 
     addFriend(friendId: ID!): User
+
   }
 `;
 

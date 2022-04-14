@@ -1,0 +1,21 @@
+[
+    {
+        "prompt": "Good Book",
+        "description": "This book has to be good",
+        "hardMode": "This book has to be super good",
+        "promptLocation": "RowOneSqOne"
+      },
+      {
+        "prompt": "ahgfadhsgdfhsdgfhsd",
+        "description": "This book has to be good",
+        "hardMode": "This book has to be super good",
+        "promptLocation": "RowOneSqTwo"
+      },
+      {
+        "prompt": "asdfgaf",
+        "description": "This book has to be good",
+        "hardMode": "This book has to be super good",
+        "promptLocation": "RowOneSqThree"
+      }
+]
+

@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose');
-// const promptSchema = require('./Prompt');
+const promptSchema = require('./Prompt');
 const reviewSchema = require('./Review');
 const dateFormat = require('../utils/dateFormat');
+const { json } = require('express/lib/response');
 
 const bookSchema = new Schema(
   {
@@ -26,9 +27,7 @@ const bookSchema = new Schema(
     image: {
       type: String
     },
-    prompt: {
-      type: String
-    }
+    prompt: [promptSchema]
   },
   {
     toJSON: {

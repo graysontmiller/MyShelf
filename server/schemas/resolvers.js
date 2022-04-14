@@ -85,6 +85,19 @@ const resolvers = {
     
       throw new AuthenticationError('You need to be logged in!');
     },
+
+//!Adding prompt is not currently working. Skipping this feature for now to come back at a later date.
+
+    // addPrompt: async (parent, args) => {
+    //   const prompt = await Prompt.create(args);
+
+    //   await Prompt.findByIdAndUpdate(
+    //     {$push: {prompts: prompt._id}}
+    //   );
+
+    //   return prompt;
+    // },
+
     addReview: async (parent, { bookId, reviewTitle, reviewText, reviewScore }, context) => {
       if (context.user) {
         const updatedBook = await Book.findOneAndUpdate(
